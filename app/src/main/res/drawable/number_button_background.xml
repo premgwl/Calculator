@@ -1,4 +1,4 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/number_button_background" /> <!-- Use the color from colors.xml -->
+    <solid android:color="#FFFFFF" /> <!-- White color for number buttons -->
     <corners android:radius="50dp" /> <!-- Adjust the radius for circular shape -->
 </shape>

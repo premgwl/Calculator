@@ -1,4 +1,4 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/number_button_background" /> <!-- Use the color from colors.xml -->
+    <solid android:color="#E69CA0" /> <!-- E69CA0 color for operator buttons -->
     <corners android:radius="50dp" /> <!-- Adjust the radius for circular shape -->
 </shape>
