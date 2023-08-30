@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/calculator_button_circular_background.xml" value="0.17395833333333333" />
+        <entry key="app/src/main/res/drawable/calculator_button_rounded_background.xml" value="0.17395833333333333" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.17395833333333333" />
+        <entry key="app/src/main/res/drawable/number_button_background.xml" value="0.17395833333333333" />
+        <entry key="app/src/main/res/drawable/operator_button_background.xml" value="0.17395833333333333" />
+        <entry key="app/src/main/res/drawable/rounded_rectangle.xml" value="0.17395833333333333" />
+        <entry key="app/src/main/res/font/open_sans.xml" value="0.18802083333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2907692307692308" />
       </map>
     </option>
