@@ -55,14 +55,29 @@ class MainActivity : AppCompatActivity() {
 
         operatorButtons.forEach { button ->
             button.setOnClickListener {
-                handleOperatorClick(button.text.toString())
+                when (button.id) {
+                    R.id.buttonAdd -> handleAddition()
+                    R.id.buttonSubtract -> handleSubtraction()
+                    R.id.buttonMultiply -> handleMultiplication()
+                    R.id.buttonDivide -> handleDivision()
+                    R.id.buttonEquals -> handleEquals()
+                    R.id.buttonAC -> handleClear()
+                    R.id.buttonC -> handleAllClear()
+                }
             }
         }
     }
 
     private fun handleNumberClick(buttonId: String) {
         val number = buttonId
-        currentInput.append(number.toString())
+
+        // Check if the current input is too long
+        if (currentInput.length >= 9) {
+            val scientificNotation = currentInput.toString().toDouble().toString()
+            currentInput = StringBuilder(scientificNotation)
+        }
+
+        currentInput.append(number)
         displayTextView.text = currentInput.toString()
         isOperatorClicked = false
     }
@@ -74,21 +89,6 @@ class MainActivity : AppCompatActivity() {
             }
             currentInput.append(".")
             displayTextView.text = currentInput.toString()
-        }
-    }
-
-    private fun handleOperatorClick(operator: String) {
-        if (!isOperatorClicked) {
-            if (currentOperator.isNotEmpty()) {
-                val secondOperand = currentInput.toString().toDouble()
-                performCalculation(secondOperand)
-            } else {
-                result = currentInput.toString().toDouble()
-            }
-
-            currentInput = StringBuilder()
-            currentOperator = operator
-            isOperatorClicked = true
         }
     }
 
@@ -132,6 +132,121 @@ class MainActivity : AppCompatActivity() {
         historyTextView.text = ""
         isOperatorClicked = false
     }
+
+    private fun handleAddition() {
+        if (!isOperatorClicked) {
+            val currentNumber = currentInput.toString().toDouble()
+            historyTextView.text = "$currentNumber + "
+            result += currentNumber
+            currentInput = StringBuilder()
+            displayTextView.text = "0"
+            isOperatorClicked = true
+            currentOperator = "+"
+        }
+    }
+
+    private fun handleSubtraction() {
+        if (!isOperatorClicked) {
+            val currentNumber = currentInput.toString().toDouble()
+            historyTextView.text = "$currentNumber - "
+            result = currentNumber
+            currentInput = StringBuilder()
+            displayTextView.text = "0"
+            isOperatorClicked = true
+            currentOperator = "-"
+        }
+    }
+
+    private fun handleMultiplication() {
+        if (!isOperatorClicked) {
+            val currentNumber = currentInput.toString().toDouble()
+            historyTextView.text = "$currentNumber * "
+            result = currentNumber
+            currentInput = StringBuilder()
+            displayTextView.text = "0"
+            isOperatorClicked = true
+            currentOperator = "*"
+        }
+    }
+
+    private fun handleDivision() {
+        if (!isOperatorClicked) {
+            val currentNumber = currentInput.toString().toDouble()
+            historyTextView.text = "$currentNumber / "
+            result = currentNumber
+            currentInput = StringBuilder()
+            displayTextView.text = "0"
+            isOperatorClicked = true
+            currentOperator = "/"
+        }
+    }
+
+    private fun handleEquals() {
+        if (!currentOperator.isEmpty()) {
+            val secondOperand = currentInput.toString().toDouble()
+            when (currentOperator) {
+                "+" -> {
+                    result += secondOperand
+                    historyTextView.text = "$result"
+                }
+                "-" -> {
+                    result -= secondOperand
+                    historyTextView.text = "$result"
+                }
+                "*" -> {
+                    result *= secondOperand
+                    historyTextView.text = "$result"
+                }
+                "/" -> {
+                    if (secondOperand != 0.0) {
+                        result /= secondOperand
+                        historyTextView.text = "$result"
+                    } else {
+                        displayTextView.text = "Error"
+                    }
+                }
+            }
+            currentInput = StringBuilder(result.toString())
+            displayTextView.text = currentInput.toString()
+            currentOperator = ""
+            isOperatorClicked = false
+        }
+    }
+
+    private fun handleClear() {
+        currentInput = StringBuilder()
+        result = 0.0
+        currentOperator = ""
+        displayTextView.text = "0"
+        historyTextView.text = ""
+        isOperatorClicked = false
+    }
+
+    private fun handleDecimal() {
+        if (!currentInput.toString().contains(".")) {
+            currentInput.append(".")
+            displayTextView.text = currentInput.toString()
+            isOperatorClicked = false
+        }
+    }
+
+    private fun handleAllClear() {
+        currentInput = StringBuilder()
+        result = 0.0
+        currentOperator = ""
+        displayTextView.text = "0"
+        historyTextView.text = ""
+        isOperatorClicked = false
+    }
+
+    private fun handlePlusMinus() {
+        if (currentInput.isNotEmpty()) {
+            val currentValue = currentInput.toString().toDouble()
+            currentInput = StringBuilder((-currentValue).toString())
+            displayTextView.text = currentInput.toString()
+        }
+    }
+
 }
 
 
